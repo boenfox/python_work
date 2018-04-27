@@ -2,9 +2,9 @@
 # -*- coding:UTF-8 -*-
 
 import os
+import time
 import requests
 from lxml import etree
-import time
 from selenium import webdriver
 
 # 将Chrome设置不加载图片的无界面的运行状态
@@ -91,11 +91,11 @@ class Spider(object):
         '''
         获取页面url的方法
         '''
-        if int(self.page_num) > 1:
-            for n in range(2, int(self.page_num)+1):
+        if int(page_num) > 1:
+            for n in range(2, int(page_num)+1):
                 page_url = 'http://www.mmjpg.com/home/' + str(n)
                 self.page_urls.append(page_url)
-        elif int(self.page_num) == 1:
+        elif int(page_num) == 1:
             pass
 
     def start(self):
@@ -106,7 +106,7 @@ class Spider(object):
         self.get_girl_urls()
         self.get_pic_urls()
 
-if __name__ == '__main__S':
-    PAGE_NUM = input("请输入页码：")
-    MMJPG_SPIDER = Spider(PAGE_NUM)
-    MMJPG_SPIDER.start()
+if __name__ == '__main__':
+    page_num = input("请输入页码：")
+    mmjpg_spider = Spider(page_num)
+    mmjpg_spider.start()
