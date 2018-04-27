@@ -55,7 +55,7 @@ def main():
     '''
     主程序入口
     '''
-    old_url = "http://www.mzitu.com/123259"
+    old_url = "http://www.mzitu.com/131458"
     page, name = get_page_name(old_url)
     os.mkdir(name)
     for i in range(1, int(page)+1):
