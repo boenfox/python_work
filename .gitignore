@@ -1,3 +1,4 @@
 # 忽略文件
 *.jpg
 .vscode/
+mmjpg.py
