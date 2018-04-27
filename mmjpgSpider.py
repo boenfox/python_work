@@ -8,16 +8,16 @@ from lxml import etree
 from selenium import webdriver
 
 # 将Chrome设置不加载图片的无界面的运行状态
-CHROME_OPTIONS = webdriver.ChromeOptions()
-PREFS = {"profile.managed_default_content_setting.images": 2}
-CHROME_OPTIONS.add_experimental_option("prefs", PREFS)
-CHROME_OPTIONS.add_argument("--headless")
-CHROME_PATH = os.path.join(os.getcwd(), 'chromedriver')
+chrome_options = webdriver.ChromeOptions()
+PREFS = {"profile.managed_default_content_settings.images": 2}
+chrome_options.add_experimental_option("prefs", PREFS)
+chrome_options.add_argument("--headless")
+chrome_path = os.path.join(os.getcwd(), 'chromedriver')
 # 设置图的存储路径
 PICTURE_PATH = os.path.join(os.getcwd(), 'picture/')
 
 # 设置headers
-HEADERS = {
+headers = {
     'User-Agent': "Mozilla/5.0 (compatible; MSIE 6.0; Windows NT 5.1)\
      Chorme/66.0.3359.139 Safari/537.36", 'Referer': 'http://www.mmjpg.com'
 }
@@ -46,7 +46,7 @@ class Spider(object):
         '''
         获取图片的url的方法
         '''
-        driver = webdriver.Chrome(CHROME_PATH, chrome_options=CHROME_OPTIONS)
+        driver = webdriver.Chrome(chrome_path, chrome_options=chrome_options)
         for girl_url in self.girl_urls:
             driver.get(girl_url)
             time.sleep(3)
@@ -77,7 +77,7 @@ class Spider(object):
         img_name = 0
         for pic_url in self.pic_urls:
             img_name += 1
-            img_data = requests.get(pic_url, headers=HEADERS)
+            img_data = requests.get(pic_url, headers=headers)
             pic_path = girl_path + '/' + str(img_name) + '.jpg'
             if os.path.isfile(pic_path):
                 print("{}第{}张图片已存在".format(self.girl_name, img_name))
